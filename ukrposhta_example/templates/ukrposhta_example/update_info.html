@@ -1,0 +1,44 @@
+{% extends 'ukrposhta_example/_base.html' %}
+{% load static %}
+
+{% block content %}
+    <div class="row mt-4">
+        <div class="col-md-2">
+            <form action="" method="post">
+                {% csrf_token %}
+
+            </form>
+        </div>
+        <div class="col-md-2"></div>
+        <div class="col-md-2">
+            <a href="{% url 'ukrposhta_example:recipient_add' %}" class="btn button-blue right-angle w-100">Додати отримувача</a>
+        </div>
+        <div class="col-md-2">
+            <a href="{% url 'ukrposhta_example:sender_add' %}" class="btn button-blue right-angle w-100">Додати відправника</a>
+        </div>
+    </div>
+    <form action="" method="post">
+        {% csrf_token %}
+        <div class="row">
+            <div class="col-md-2">{{ form.date_of_storage_starting }}</div>
+            <div class="col-md-2">{{ form.track_number }}</div>
+            <div class="col-md-2">{{ form.recipient_address }}</div>
+            <div class="col-md-6">{{ form.sender_data }}</div>
+        </div>
+        <div class="row mt-4 mb-4">
+            <div class="col-md-3 mt-1">{{ form.letter_image }}</div>
+            <div class="col-md-4 border d-flex flex-row p-2 table-head">
+                <div class="mx-auto">Повторне: {{ form.repeat_delivery }}</div>
+                <div>Суд: {{ form.is_court }}</div>
+                <div class="mx-auto">Повістка: {{ form.is_court_subpoena }}</div>
+                <div>Штраф: {{ form.is_police_fine }}</div>
+            </div>
+            <div class="col-md-5">{{ form.comments }}</div>
+        </div>
+        <div class="row justify-content-center">
+            <div class="col-md-4">
+                <button type="submit" class="btn button-light right-angle w-100">Оновити дані</button>
+            </div>
+        </div>
+    </form>
+{% endblock %}

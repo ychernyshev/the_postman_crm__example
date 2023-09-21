@@ -1,0 +1,256 @@
+{% extends 'ukrposhta_example/_base.html' %}
+{% load static %}
+
+{% block content %}
+    <div class="row p-2">
+        <div class="row border-bottom p-3 table-head tr-tcolor bold mobile-subtext">
+            <div class="col-md-1"></div>
+            <div class="col-md-2 text-center">Трек-Номер | Дата</div>
+            <div class="col-md-2 text-center">Отримувач</div>
+            <div class="col-md-2 text-center">Додаткова інформація</div>
+            <div class="col-md-2">Відправник</div>
+        </div>
+        {% for item in subscriber %}
+            {% for letter in item.subscriber_letter.all %}
+                {% for name in item.subscriber_name.all %}
+                    <div class="row p-0 mb-2">
+                        <div class="col-md-1 my-auto">
+                            {% if letter.letter_image is not None %}
+                                <img src="{% static "images/default.png" %}" class="card-img-top" alt="..."
+                                     width="100">
+                            {% else %}
+                                <img src="{% static "letter.letter_image" %}" class="card-img-top" alt="..."
+                                     width="20">
+                            {% endif %}
+                        </div>
+                        <div class="col-md-2 mt-2 d-flex flex-column text-center">
+                            <span class="mb-2 text-light b-dark-secondary p-2">{{ letter.track_number }}</span>
+                            <span class="text-3 p-2 b-light" style="margin-top: -.45rem">
+                                {{ letter.date_of_storage_starting|date:'d.m.Y' }}</span>
+                        </div>
+                        <div class="col-md-2 my-auto text-center d-flex flex-column">
+                            <div>{{ letter.recipient_address }}</div>
+                            <div>{{ name.name }}</div>
+                        </div>
+                        <div class="col-md-2 mt-2">
+                            <table class="table table-bordered">
+                                <tbody>
+                                <tr class="text-center">
+                                    {% if letter.repeat_delivery %}
+                                        <td style="background: #677D9D;
+                                        color: #f6f6f6;
+                                        border: .1rem solid #677D9D">
+                                            Повторне
+                                        <td>
+                                            {% else %}
+                                        <td>
+                                            <span class="text-secondary-light">
+                                                            Повторне</span>
+                                        </td>
+                                    {% endif %}
+                                    {% if letter.is_police_fine %}
+                                        <td style="background: #677D9D; color: #f6f6f6;
+                                        border: .1rem solid #677D9D">
+                                            Штраф
+                                        </td>
+                                    {% else %}
+                                        <td>
+                                                <span class="text-secondary-light">
+                                                                    Штраф</span>
+                                        </td>
+                                    {% endif %}
+                                </tr>
+                                <tr class="text-center">
+                                    {% if letter.is_court %}
+                                        <td style="background: #677D9D; color: #f6f6f6;
+                                        border: .1rem solid #677D9D">
+                                            Суд
+                                            {% else %}
+                                        <td>
+                                            <span class="text-secondary-light">
+                                                Суд
+                                                        </span>
+                                        </td>
+                                    {% endif %}
+                                    {% if letter.is_court_subpoena %}
+                                        <td style="background: #7D95C1;
+                                        color: #f6f6f6;
+                                        border: .1rem solid #7D95C1">
+                                            Повістка
+                                        </td>
+                                    {% else %}
+                                        <td>
+                                        <span class="text-secondary-light">
+                                                        Повістка</span>
+                                        </td>
+                                    {% endif %}
+                                </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                        <div class="col-md-3 mt-1">
+                            {{ letter.sender_data }}
+                        </div>
+                        <div class="col-md-2">
+                            <div class="d-flex flex-column mt-2">
+                                <a href="{% url 'ukrposhta_example:letter_details' letter.slug %}"
+                                   class="btn button-blue right-angle">Деталі</a>
+                                <a href="{% url 'ukrposhta_example:letter_update' letter.slug %}" class="btn button-light right-angle">Редагувати</a>
+                            </div>
+                        </div>
+                    </div>
+
+
+
+
+                    {#                    <table class="table table-borderless">#}
+                    {#                        <thead>#}
+                    {#                        <tr>#}
+                    {#                            <th scope="col"></th>#}
+                    {#                            <th scope="col">Трек-Номер|Дата</th>#}
+                    {#                            <th scope="col">Отримувач</th>#}
+                    {#                            <th scope="col" class="text-center">Додаткова інформація</th>#}
+                    {#                            <th scope="col">Відправник</th>#}
+                    {#                        </tr>#}
+                    {#                        </thead>#}
+                    {#                        <tbody>#}
+                    {#                        <tr>#}
+                    {#                            <th scope="row">#}
+                    {#                                {% if letter.letter_image is not None %}#}
+                    {#                                    <img src="{% static "images/default.png" %}" class="card-img-top" alt="..."#}
+                    {#                                         width="2">#}
+                    {#                                {% else %}#}
+                    {#                                    <img src="{% static "letter.letter_image" %}" class="card-img-top" alt="..."#}
+                    {#                                         width="20">#}
+                    {#                                {% endif %}#}
+                    {#                            </th>#}
+                    {#                            <td>#}
+                    {#                                {{ letter.track_number }}#}
+                    {#                                <span class="text-3 text-light b-primary-light p-2">#}
+                    {#                                    {{ letter.date_of_storage_starting|date:'d.m.Y' }}</span>#}
+                    {#                            </td>#}
+                    {#                            <td>#}
+                    {#                                {{ letter.recipient_address }} {{ name.name }}#}
+                    {#                            </td>#}
+                    {#                            <td>#}
+                    {#                                <table class="table table-bordered">#}
+                    {#                                    <tbody>#}
+                    {#                                    <tr class="text-center">#}
+                    {#                                        {% if letter.repeat_delivery %}#}
+                    {#                                            <td style="background: #677D9D; color: #f6f6f6">#}
+                    {#                                                Повторне#}
+                    {#                                            <td>#}
+                    {#                                                {% else %}#}
+                    {#                                            <td>#}
+                    {#                                            <span class="text-secondary-light">#}
+                    {#                                                            Повторне</span>#}
+                    {#                                        {% endif %}#}
+                    {#                                        </td>#}
+                    {#                                        {% if letter.is_court %}#}
+                    {#                                            <td style="background: #677D9D; color: #f6f6f6">#}
+                    {#                                                Суд#}
+                    {#                                                {% else %}#}
+                    {#                                            <td>#}
+                    {#                                            <span class="text-secondary-light">#}
+                    {#                                                Суд#}
+                    {#                                                        </span>#}
+                    {#                                            </td>#}
+                    {#                                        {% endif %}#}
+                    {#                                        {% if letter.is_court_subpoena %}#}
+                    {#                                            <td style="background: #677D9D; color: #f6f6f6">#}
+                    {#                                                Повістка#}
+                    {#                                            </td>#}
+                    {#                                        {% else %}#}
+                    {#                                            <td>#}
+                    {#                                        <span class="text-secondary-light">#}
+                    {#                                                        Повістка</span>#}
+                    {#                                            </td>#}
+                    {#                                        {% endif %}#}
+                    {#                                        {% if letter.is_police_fine %}#}
+                    {#                                            <td style="background: #677D9D; color: #f6f6f6">#}
+                    {#                                                Штраф#}
+                    {#                                            </td>#}
+                    {#                                        {% else %}#}
+                    {#                                            <td>#}
+                    {#                                                <span class="text-secondary-light">#}
+                    {#                                                                    Штраф</span>#}
+                    {#                                            </td>#}
+                    {#                                        {% endif %}#}
+                    {#                                    </tr>#}
+                    {#                                    </tbody>#}
+                    {#                                </table>#}
+                    {#                            </td>#}
+                    {#                            <td class="">#}
+                    {#                                {{ letter.sender_data }}#}
+                    {#                            </td>#}
+                    {#                        </tr>#}
+                    {#                        </tbody>#}
+                    {#                    </table>#}
+
+
+
+                    {#                    <div class="col-md-3 mb-3">#}
+                    {#                        <div class="card" style="width: 18rem; border: none">#}
+                    {#                            {% if letter.letter_image %}#}
+                    {#                                <img src="{% static "letter.letter_image" %}" class="card-img-top" alt="...">#}
+                    {#                            {% elif letter.letter_image is not None %}#}
+                    {#                                <img src="{% static "images/default.png" %}" class="card-img-top" alt="...">#}
+                    {#                            {% endif %}#}
+                    {#                            <div class="card-body">#}
+                    {#                                <h5 class="card-title">#}
+                    {#                                    {{ letter.track_number }}#}
+                    {#                                    <span class="text-3 text-light b-secondary p-1">#}
+                    {#                                    {{ letter.date_of_storage_starting|date:'d.m.Y' }}#}
+                    {#                                </span></h5>#}
+                    {#                                <h6 class="card-subtitle mb-2 text-body-secondary">#}
+                    {#                                    {% if repeat_delivery %}#}
+                    {#                                        <b>Повторне</b> |#}
+                    {#                                    {% endif %}#}
+                    {#                                    {{ letter.recipient_address }} {{ name.name }}#}
+                    {#                                </h6>#}
+                    {#                                <h6 class="card-subtitle mb-2 text-body-secondary">#}
+                    {#                                    <table class="table table-bordered">#}
+                    {#                                        <tbody>#}
+                    {#                                        <tr class="text-center">#}
+                    {#                                            <td>#}
+                    {#                                                {% if letter.is_court %}#}
+                    {#                                                    <span class="text-success-custom">Суд</span>#}
+                    {#                                                {% else %}#}
+                    {#                                                    <span class="text-secondary-light">#}
+                    {#                                                        Суд</span>#}
+                    {#                                                {% endif %}</td>#}
+                    {#                                            <td>#}
+                    {#                                                {% if letter.is_court_subpoena %}#}
+                    {#                                                    <span class="text-success-custom">#}
+                    {#                                                    Повістка#}
+                    {#                                                </span>#}
+                    {#                                                {% else %}#}
+                    {#                                                    <span class="text-secondary-light">#}
+                    {#                                                        Повістка</span>#}
+                    {#                                                {% endif %}</td>#}
+                    {#                                            <td>#}
+                    {#                                                {% if letter.is_police_fine %}#}
+                    {#                                                    <span class="text-success-custom">#}
+                    {#                                                        Штраф</span>#}
+                    {#                                                {% else %}#}
+                    {#                                                    <span class="text-secondary-light">#}
+                    {#                                                        Штраф</span>#}
+                    {#                                                {% endif %}</td>#}
+                    {#                                        </tr>#}
+                    {#                                        </tbody>#}
+                    {#                                    </table>#}
+                    {#                                </h6>#}
+                    {#                                <div class="d-flex flex-column">#}
+                    {#                                    <p class="card-text b-dark-secondary text-light p-1">{{ letter.sender_data }}</p>#}
+                    {#                                    <a href="#" class="btn button-light right-angle">#}
+                    {#                                        Редагувати#}
+                    {#                                    </a>#}
+                    {#                                </div>#}
+                    {#                            </div>#}
+                    {#                        </div>#}
+                    {#                    </div>#}
+                {% endfor %}
+            {% endfor %}
+        {% endfor %}
+    </div>
+{% endblock %}

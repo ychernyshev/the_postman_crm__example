@@ -1,0 +1,47 @@
+<nav class="navbar navbar-expand-lg bg-body-tertiary">
+    <div class="container-fluid">
+        <a class="navbar-brand mx-lg-4 mobile-text" href="#">Postman <p class="text-1 mobile-subtext">NextGen V4.October Update</p></a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
+                aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon mobile-text"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <form class="col-lg-3 col-sm-12 cl-12 form-inline my-2 my-lg-0 mx-auto" action="{% url 'ukrposhta_example:search_results' %}"
+                  method="get">
+                <div class="d-flex flex-row">
+                    {{ search_form.query }}
+                    <button class="btn button-success b-success my-2 my-sm-0 right-angle outline mobile-text" type="submit">Пошук
+                    </button>
+                </div>
+            </form>
+            <ul class="col-lg-6 col-sm-12 col-12 navbar-nav me-auto mb-2 mb-lg-0 text-center">
+                <li class="nav-item mt-1-mobile">
+                    <a href="{% url 'ukrposhta_example:archive' %}" class="btn button-nav-blue button-nav-blue-media mobile-text btn-block right-angle">
+                        Каталог листів
+                    </a>
+                </li>
+                <li class="nav-item mt-1-mobile">
+                    <a href="{% url 'ukrposhta_example:letter_add' %}" class="btn button-nav-blue button-nav-blue-media mobile-text btn-block right-angle">
+                        Додати лист
+                    </a>
+                </li>
+                <li class="nav-item mt-1-mobile">
+                    <a href="{% url 'ukrposhta_example:recipient_list' %}" class="btn button-nav-blue button-nav-blue-media mobile-text btn-block right-angle">
+                        Отримувачі
+                    </a>
+                </li>
+            </ul>
+            <div class="dropdown mx-auto">
+            <button class="button-light right-angle dropdown-toggle mobile-text w-100" type="button" data-bs-toggle="dropdown"
+                    aria-expanded="false">
+                Додаткові опції
+            </button>
+            <ul class="dropdown-menu dropdown-menu-lg-end right-angle">
+                <li><a class="dropdown-item mobile-text" href="{% url 'ukrposhta_example:recipient_add' %}">Додати отримувача</a></li>
+                <li><a class="dropdown-item mobile-text" href="{% url 'ukrposhta_example:sender_add' %}">Додати відправника</a></li>
+                <li><a class="dropdown-item mobile-text" href="{% url 'ukrposhta_example:sender_list' %}">Відправники</a></li>
+            </ul>
+        </div>
+        </div>
+    </div>
+</nav>

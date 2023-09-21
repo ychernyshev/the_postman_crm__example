@@ -1,0 +1,73 @@
+{% extends 'ukrposhta_example/_base.html' %}
+{% load static %}
+
+{% block content %}
+    <div class="container py-4">
+        <header class="pb-3 mb-4 border-bottom">
+                        <span class="fs-4 d-flex flex-row"><b>№</b> <a
+                                href="https://track.ukrposhta.ua/tracking_UA.html?barcode={{ letter_number.track_number }}"
+                                class="btn button-light right-angle" style="margin-left: .3rem"
+                                target="_blank">{{ letter_number.track_number }}</a>
+                            <a href="{% url 'ukrposhta_example:letter_update' letter_number.slug %}" class="btn button-success right-angle" type="button">Внести зміни
+                            </a>
+                        </span>
+        </header>
+        <div class="p-5 mb-4 bg-body-tertiary rounded-3">
+            {% for item in letter_details %}
+                <div class="row">
+                    <div class="col-md-8">
+                        <div class="container-fluid py-5">
+                            <h1 class="display-5 fw-bold">{{ item.track_number }} | {{ item.recipient_address }}</h1>
+                            <p class="col-md-8 fs-4">{{ item.sender_data }}.</p>
+                            <div class="row m-lg-0">
+                                {% if item.repeat_delivery %}
+                                    <div class="col-md-2 p-3 text-3 text-center" style="background: #677D9D; color: #f6f6f6; border: .1rem solid #677D9D">
+                                        Повторне
+                                    </div>
+                                {% else %}
+                                    <div class="col-md-2 border p-3 text-3 text-center text-secondary-light border">
+                                        Повторне
+                                    </div>
+                                {% endif %}
+                                {% if item.is_police_fine %}
+                                    <div class="col-md-2 p-3 text-3 text-center" style="background: #7D95C1; color: #f6f6f6; border: .1rem solid #7D95C1">
+                                        Штраф
+                                    </div>
+                                {% else %}
+                                    <div class="col-md-2 border p-3 text-3 text-center text-secondary-light border">
+                                        Штраф
+                                    </div>
+                                {% endif %}
+                                {% if item.is_court %}
+                                    <div class="col-md-2 p-3 text-3 text-center " style="background: #677D9D; color: #f6f6f6; border: .1rem solid #677D9D">
+                                        Суд
+                                    </div>
+                                {% else %}
+                                    <div class="col-md-2 p-3 text-3 text-center text-secondary-light border">
+                                        Суд
+                                    </div>
+                                {% endif %}
+                                {% if item.is_court_subpoena %}
+                                    <div class="col-md-2 p-3 text-3 text-center" style="background: #7D95C1; color: #f6f6f6; border: .1rem solid #7D95C1">
+                                        Повістка
+                                    </div>
+                                {% else %}
+                                    <div class="col-md-2 border p-3 text-3 text-center text-secondary-light border">
+                                        Повістка
+                                    </div>
+                                {% endif %}
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-4 mt-5">
+                        {% if item.letter_image is not None %}
+                            <img src="{% static "images/default.png" %}" class="card-img-top mt-2" alt="...">
+                        {% else %}
+                            <img src="{% static "letter.letter_image" %}" class="card-img-top mt-2" alt="...">
+                        {% endif %}
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+    </div>
+{% endblock %}

@@ -1,0 +1,130 @@
+{% extends 'ukrposhta_example/_base.html' %}
+{% load static %}
+
+{% block content %}
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-12">
+                <div class="row mt-4">
+                    <div class="col-xl-2 col-lg-2 col-sm-12">
+                        <form action="" method="post">
+                            {% csrf_token %}
+
+                        </form>
+                    </div>
+                    <div class="col-xl-2 xol-lg-2"></div>
+                    <div class="col-xl-2 col-lg-2 col-sm-6 col-12">
+                        <a href="{% url 'ukrposhta_example:recipient_add' %}"
+                           class="btn button-blue right-angle w-100 mobile-text">Додати
+                            отримувача</a>
+                    </div>
+                    <div class="col-xl-2 col-lg-2 col-sm-6 col-12">
+                        <a href="{% url 'ukrposhta_example:sender_add' %}"
+                           class="btn button-blue right-angle w-100 mobile-text">Додати
+                            відправника</a>
+                    </div>
+                </div>
+                <form action="" method="post" class="mobile-mt-2">
+                    {% csrf_token %}
+                    <div class="row">
+                        <div class="col-xl-2 col-lg-2 col-sm-6 col-12">{{ form.date_of_storage_starting }}</div>
+                        <div class="col-xl-2 col-lg-2 col-sm-6 col-12">{{ form.track_number }}</div>
+                        <div class="col-xl-2 col-lg-2 col-sm-6 col-12 mobile-mt-2">{{ form.recipient_address }}</div>
+                        <div class="col-xl-6 col-lg-6 col-sm-6 col-12 mobile-mt-2">{{ form.sender_data }}</div>
+                    </div>
+                    <div class="row mt-4 mb-4">
+                        <div class="col-xl-3 col-lg-3 col-sm-12 col-12 mt-1 text-center">{{ form.letter_image }}</div>
+                        <div class="col-xl-4 col-lg-4 col-sm-12 col-12 border d-flex flex-row table-head mobile-mt-2">
+                            <div class="row text-center">
+                                <div class="col-xl-3 col-lg-3 col-sm-6 col-12 mx-auto mobile-text">
+                                    Повторне: {{ form.repeat_delivery }}</div>
+                                <div class="col-xl-3 col-lg-3 col-sm-6 col-12 mobile-text">
+                                    Суд: {{ form.is_court }}</div>
+                                <div class="col-xl-3 col-lg-3 col-sm-6 col-12 mx-auto mobile-text">
+                                    Повістка: {{ form.is_court_subpoena }}</div>
+                                <div class="col-xl-3 col-lg-3 col-sm-6 col-12 mobile-text">
+                                    Штраф: {{ form.is_police_fine }}</div>
+                            </div>
+                        </div>
+                        <div class="col-xl-5 col-lg-5 col-sm-12 col-12 mobile-mt-2">{{ form.comments }}</div>
+                    </div>
+                    <div class="row justify-content-center">
+                        <div class="col-md-4">
+                            <button type="submit" class="btn button-light right-angle w-100 mobile-text mobile-mt-2">
+                                Додати
+                                лист
+                            </button>
+                        </div>
+                    </div>
+                </form>
+                <table class="table mt-5">
+                    <tbody>
+                    {% for letter in letters %}
+                        {% for item in letter.subscriber_letter.all %}
+                            {% for name in letter.subscriber_name.all %}
+                                <tr>
+                                    <td>
+                                        {% if item.letter_image is not None %}
+                                            <img src="{% static 'images/default.png' %}" alt="item.track_number"
+                                                 width="80">
+                                        {% else %}
+                                            <img src="{{ item.letter_image }}" alt="{{ item.track_number }}">
+                                        {% endif %}
+                                    </td>
+                                    <th scope="row"><a href="" class="text-secondary">{{ item.track_number }}</a></th>
+                                    <td>
+                                        <a href="" class="text-secondary">
+                                            {{ item.recipient_address }}
+                                        </a>
+                                        {{ name.name }}
+                                    </td>
+                                    <td>{{ item.sender_data }}</td>
+                                    <td>
+                                        <table class="table table-bordered">
+                                            <tbody>
+                                            <tr class="text-center">
+                                                <td>
+                                                    {% if letter.repeat_delivery %}
+                                                        <span class="text-success-custom">Повторне</span>
+                                                    {% else %}
+                                                        <span class="text-secondary-light">
+                                                        Повторне</span>
+                                                    {% endif %}</td>
+                                                <td>
+                                                    {% if letter.is_court %}
+                                                        <span class="text-success-custom">Суд</span>
+                                                    {% else %}
+                                                        <span class="text-secondary-light">
+                                                        Суд</span>
+                                                    {% endif %}</td>
+                                                <td>
+                                                    {% if letter.is_court_subpoena %}
+                                                        <span class="text-success-custom">
+                                                    Повістка
+                                                </span>
+                                                    {% else %}
+                                                        <span class="text-secondary-light">
+                                                        Повістка</span>
+                                                    {% endif %}</td>
+                                                <td>
+                                                    {% if letter.is_police_fine %}
+                                                        <span class="text-success-custom">
+                                                        Штраф</span>
+                                                    {% else %}
+                                                        <span class="text-secondary-light">
+                                                        Штраф</span>
+                                                    {% endif %}</td>
+                                            </tr>
+                                            </tbody>
+                                        </table>
+                                    </td>
+                                </tr>
+                            {% endfor %}
+                        {% endfor %}
+                    {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+{% endblock %}

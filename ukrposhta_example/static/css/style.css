@@ -1,0 +1,280 @@
+html body {
+    height: 100%;
+}
+
+.main-container {
+    width: 100%;
+    height: 100%;
+    /*background: url("/static/postman/images/2016-02-07-dark.jpg") 50% 0 no-repeat fixed;*/
+    background-size: 100%;
+}
+
+.form-box {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 100%;
+    background: transparent;
+    backdrop-filter: blur(30px);
+    border-radius: 1rem;
+    box-shadow: 0 0 0 .1rem rgba(255, 255, 255, .5);
+}
+
+.input-box {
+    width: 280px;
+    height: 50px;
+    border: none;
+    border-bottom: .1rem solid #142534;
+    background: none;
+    outline: none;
+    color: #e4e4e4;
+}
+
+.input-box::placeholder {
+    color: #e4e4e4;
+}
+
+.global-margin {
+    margin-top: 7rem;
+}
+
+.button-custom {
+    padding: .7rem 1rem .7rem 1rem;
+    outline: none;
+    cursor: pointer;
+    background: #142534;
+    font-size: 1rem;
+    color: #e4e4e4;
+    transition: 1s;
+}
+
+.button-custom:hover {
+    padding: .55rem .5rem .55rem .6rem;
+    transition: 1s;
+    font-size: 1.2rem;
+    color: #e4e4e4;
+}
+
+/*.button-catalog {*/
+/*    padding: .5rem 4.5rem .5rem 4.5rem;*/
+/*    border: none;*/
+/*    background: #5EA3FF;*/
+/*    text-decoration: none;*/
+/*    color: #fff;*/
+/*    transition: 1s;*/
+/*}*/
+
+/*.button-catalog:hover {*/
+/*    background: #5E93FF;*/
+/*    transition: 1s;*/
+/*    text-decoration: none;*/
+/*    color: #fff;*/
+/*}*/
+
+.button-light {
+    padding: .5rem 1rem .5rem 1rem;
+    box-shadow: 0 0 .3rem .1rem rgba(0, 0, 0, .1);
+    background: #ffffff;
+    border: none;
+    color: #142534;
+    transition: .5s;
+}
+
+.button-light:hover {
+    text-decoration: none;
+    transition: .5s;
+    box-shadow: 0 0 .2rem .05rem rgba(0, 0, 0, .1);
+}
+
+.button-blue {
+    padding: .5rem 1rem .5rem 1rem;
+    box-shadow: 0 0 .3rem .1rem rgba(0, 0, 0, .1);
+    background: #5EA3FF;
+    border: none;
+    color: #ffffff;
+    transition: .5s;
+}
+
+.button-blue:hover {
+    text-decoration: none;
+    transition: .5s;
+    box-shadow: 0 0 .2rem .05rem rgba(0, 0, 0, .1);
+    background: #5E93FF;
+    color: #ffffff;
+}
+
+.button-blue:active {
+    background: #5E93FF;
+}
+
+.button-delete {
+    padding: .5rem 1rem .5rem 1rem;
+    box-shadow: 0 0 .3rem .1rem rgba(0, 0, 0, .1);
+    background: #FF5151;
+    border: none;
+    color: #ffffff;
+    transition: .5s;
+}
+
+
+.button-delete:hover {
+    text-decoration: none;
+    transition: .5s;
+    box-shadow: 0 0 .2rem .05rem rgba(0, 0, 0, .1);
+    background: #FF7A7A;
+    color: #ffffff;
+}
+
+.button-success {
+    padding: .5rem 1rem .5rem 1rem;
+    box-shadow: 0 0 .3rem .1rem rgba(0, 0, 0, .1);
+    background: #00D966;
+    border: none;
+    color: #ffffff;
+    transition: .5s;
+}
+
+
+.button-success:hover {
+    text-decoration: none;
+    transition: .5s;
+    box-shadow: 0 0 .2rem .05rem rgba(0, 0, 0, .1);
+    background: #01EA6E;
+    color: #ffffff;
+}
+
+.right-angle {
+    border-radius: 0;
+}
+
+.outline {
+    outline: none;
+}
+
+.specific-border-radius {
+    border-radius: .5rem;
+}
+
+.light-red {
+    background: #FF7A7A;
+}
+
+.b-primary-dark {
+    background: #4895EA;
+}
+
+.b-primary-light {
+    background: #5E93FF;
+}
+
+.b-secondary {
+    background: #677D9D;
+}
+
+.b-dark-secondary {
+    background: #7D95C1;
+}
+
+.b-light-secondary {
+    background: #fefefe;
+}
+
+.b-warning {
+    background: #FFA033;
+}
+
+.b-success {
+    background: #00CC60;
+}
+
+.b-light {
+    background: #F3F9FE;
+}
+
+.text-light-not-success {
+    color: #FF7A7A;
+}
+
+.text-success-custom {
+    color: #00CC60;
+}
+
+.text-secondary-light {
+    color: #dedede;
+}
+
+input[type=checkbox] {
+    width: 1rem;
+    height: 1rem;
+}
+
+.table-head {
+    font-size: .8rem;
+    background: #EBF0F4;
+}
+
+.tbody-style {
+    font-size: .9rem;
+}
+
+.tr-tcolor {
+    color: #7D95C1
+}
+
+.border {
+    border: .2rem solid #CED4DA;
+}
+
+.border-top {
+    border-top: .2rem solid #CED4DA;
+}
+
+.border-bottom {
+    border-bottom: .2rem solid #CED4DA;
+}
+
+.border-left {
+    border-left: .2rem solid #CED4DA;
+}
+
+.border-right {
+    border-right: .2rem solid #CED4DA;
+}
+
+#line-break {
+  white-space: pre-line;
+}
+
+.with-1 {
+    width: 15rem;
+}
+
+.text-1 {
+    font-size: .6rem;
+}
+
+.text-2 {
+    font-size: .8rem;
+}
+
+.text-3 {
+    font-size: 1rem;
+}
+
+.text-4 {
+    font-size: 1.2rem;
+}
+
+.text-5 {
+    font-size: 1.4rem;
+}
+
+.bold {
+    font-weight: bold;
+}
+
+.shadow-1 {
+    box-shadow: 11rem 11rem 0 .1rem rgba(255, 255, 255, .5);
+}

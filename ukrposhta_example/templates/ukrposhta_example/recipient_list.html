@@ -1,0 +1,68 @@
+{% extends 'ukrposhta_example/_base.html' %}
+{% load static %}
+
+{% block content %}
+    <div class="container-fluid">
+        <div class="row justify-content-center">
+            {% for recipient in recipients_numbers %}
+                <div class="col-xl-4 col-lg-6 col-sm-12 col-12">
+                    <div class="card mt-3">
+                        <div class="card-body row">
+                            <div class="col-6 mobile-text">
+                                {{ recipient.get_street_display }} {{ recipient.build }}
+                                {% if recipient.build_letter %}
+                                    {{ recipient.get_build_letter_display }}
+                                {% endif %}
+                                /{{ recipient.flat }}
+                            </div>
+                            <div class="col-6 d-flex justify-content-end">
+                                <a href=""
+                                   class="btn button-success mobile-text right-angle mx-auto">Листи</a>
+                                <a href="" class="btn button-light mobile-text right-angle">Редагувати</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            {% endfor %}
+            <div class="row justify-content-center">
+                <div class="col-4 d-flex">
+                    <!-- pagination-->
+                    <nav class="mt-1 mx-auto"
+                         aria-label="Page navigation example">
+                        <ul class="pagination">
+                            <li class="page-item">
+                                {% if recipients_numbers.has_previous %}
+                                    <a class="page-link"
+                                       href="?page={{ recipients_numbers.previous_page.number }}"
+                                       aria-label="Previous">
+                                        <span aria-hidden="true">&laquo;</span>
+                                    </a>
+                                {% endif %}
+                            </li>
+                            {% for page in recipients_numbers.paginator.page_range %}
+                                {% if page > recipients_numbers.number|add:-10 and page < recipients_numbers.number|add:10 %}
+                                    <li class="page-item"><a class="page-link"
+                                                             href="?page={{ page }}">{{ page }}</a>
+                                    </li>
+                                {% endif %}
+                            {% endfor %}
+                            {% if recipients_numbers.has_next %}
+                                <li class="page-item">
+                                    <a class="page-link"
+                                       href="?page={{ recipients_numbers.paginator.num_pages }}"
+                                       aria-label="Next">
+                                        <span aria-hidden="true">&raquo;</span>
+                                    </a>
+                                </li>
+                            {% endif %}
+                            <li class="page-item">
+                            </li>
+                        </ul>
+                    </nav>
+                    <!-- /pagination-->
+                </div>
+            </div>
+        </div>
+    </div>
+
+{% endblock %}
