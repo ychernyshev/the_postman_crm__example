@@ -37,6 +37,9 @@ python3 manage.py runserver
 http://localhost:8000
 ```
 
+## 📜 License
+This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
+
 #### Preview images
 ![postman_crm_example-add_item.png](ukrposhta_example/static/images/postman_crm_example-add_item.png)
  
