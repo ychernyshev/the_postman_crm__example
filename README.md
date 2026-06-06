@@ -12,6 +12,11 @@ A simple CRM system for recording and organising information about packages that
 python3 -m venv venv
 ```
 
+### Install requirements
+```
+pip install -r requirements.txt
+```
+
 ### Activate environment
 ```
 source venv/bin/activate 
